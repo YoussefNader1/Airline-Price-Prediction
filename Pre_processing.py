@@ -11,7 +11,6 @@ def Feature_Encoder(X, cols):
         X[c] = lbl.transform(list(X[c].values))
     return X
 
-
 def featureScaling(X, a, b):
     X = np.array(X)
     Normalized_X = np.zeros((X.shape[0], X.shape[1]))
