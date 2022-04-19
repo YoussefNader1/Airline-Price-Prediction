@@ -33,15 +33,10 @@ Y = Y_preprocessData(Y)
 top_features = correlation(X, Y)
 
 X = X[top_features]
-# X = X.replace([np.inf, -np.inf], np.nan)
-# X = X.fillna(method='bfill', inplace=True)
-# X = X.dropna(inplace=True)
-# X = X.dropna(how='any',inplace=True)
-# x = X.to_numpy()
-# print(type(x))
-# print(x)
-# X = X.iloc[:,:].values
-# X = X.reshape(-1,1)
+# DataFrame to Arraaaaaaaaayy
+X=np.array(X)
+Y=np.array(Y)
+
 
 cls = linear_model.LinearRegression()
 cls.fit(X,Y)
