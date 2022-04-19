@@ -82,7 +82,6 @@ def X_preprocessData(X, data):
 
 #PreProcessing for Price column
 def Y_preprocessData(Y):
-    Y = Y.str.replace(',', '.')
-    Y = pd.DataFrame(Y)
-    Y['price'] = pd.to_numeric(Y['price'], errors='coerce')
+    Y = Y.str.replace(',', '')
+    Y['price'] = pd.to_numeric(Y['price'])
     return Y
