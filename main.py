@@ -26,12 +26,27 @@ cols = ('airline', 'ch_code', 'type', 'source', 'destination')
 X = Feature_Encoder(X, cols)
 
 #Feature Scaling
-X = featureScaling(X, 0, 10) #Look At Meeeee Agaaaaiiiiinnnnnnnnn
-
+X = featureScaling(X, 0, 1) #Look At Meeeee Agaaaaiiiiinnnnnnnnn
 #Price processing
 Y = Y_preprocessData(Y)
 
-top_features = correlation(X,Y)
+top_features = correlation(X, Y)
 
-#singlevar has type columne whice has the highest correlation
-singleVar = top_features[0]
+X = X[top_features]
+# X = X.replace([np.inf, -np.inf], np.nan)
+# X = X.fillna(method='bfill', inplace=True)
+# X = X.dropna(inplace=True)
+# X = X.dropna(how='any',inplace=True)
+# x = X.to_numpy()
+# print(type(x))
+# print(x)
+# X = X.iloc[:,:].values
+# X = X.reshape(-1,1)
+
+cls = linear_model.LinearRegression()
+cls.fit(X,Y)
+Prediction = cls.predict(X)
+
+print('Co-efficient of linear regression',cls.coef_)
+print('Intercept of linear regression model',cls.intercept_)
+print('Mean Square Error', metrics.mean_squared_error(np.asarray(Y), Prediction))
