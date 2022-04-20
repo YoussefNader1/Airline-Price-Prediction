@@ -60,7 +60,7 @@ if choice == 1:
     print('R2 Score', metrics.r2_score(y_test, Prediction))
     print('Mean Square Error', metrics.mean_squared_error(np.asarray(y_test), Prediction))
     print("Actual time for training", endTrain - startTrain)
-    print("Actual time for prediction", end_test - start_test)
+    print("Actual time for Testing", end_test - start_test)
 
     true_price_value = np.asarray(y_test)[0]
     predicted_price_value = Prediction[0]
@@ -90,7 +90,7 @@ elif choice == 2:
     print('R2 Score', metrics.r2_score(y_test, prediction))
     print('Mean Square Error', metrics.mean_squared_error(y_test, prediction))
     print("Actual time for training", endTrain - startTrain)
-    print("Actual time for prediction", end_test - start_test)
+    print("Actual time for Testing", end_test - start_test)
 
     true_price_value = np.asarray(y_test)[0]
     predicted_price_value = prediction[0]
