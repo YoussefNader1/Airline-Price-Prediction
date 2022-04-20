@@ -1,6 +1,3 @@
-import numpy as np
-import pandas as pd
-import seaborn as sns
 from sklearn import linear_model
 from sklearn import metrics
 from sklearn.model_selection import train_test_split
@@ -9,28 +6,30 @@ from Pre_processing import *
 from Correlation import *
 import time
 
-# Load players data
+# Load Airline data
 data = pd.read_csv('airline-price-prediction.csv')
 # Features
 X = data.iloc[:, 0:10]
-# OutPut
+# Label
 Y = data['price']
 
-#Feature processing
+# Feature processing
 X = X_preprocessData(X, data)
-# Price processing
+# Label processing
 Y = Y_preprocessData(Y)
 
-cols = ('airline', 'ch_code', 'type', 'source', 'destination')
+# Feature encoding
+cols = ('airline', 'ch_code', 'type', 'source', 'destination')  # column to be encoded
 X = Feature_Encoder(X, cols)
 
 # Feature Scaling
 X = featureScaling(X, 0, 1)
 
+# Feature selection
 top_features = correlation(X, Y)
-
 X = X[top_features]
 
+# Data distribution
 x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.20, shuffle=True,
                                                     random_state=1)  # Features splitting
 
@@ -41,7 +40,7 @@ Y = np.array(Y)
 # Drop nulls for train data
 x_train.dropna(how='any', inplace=True)
 y_train.dropna(how='any', inplace=True)
-#Replace null for test data
+# Replace null for test data
 x_test.fillna(0)
 y_test.fillna(0)
 
@@ -58,7 +57,7 @@ if choice == 1:
 
     print('Co-efficient of linear regression', cls.coef_)
     print('Intercept of linear regression model', cls.intercept_)
-    print('Mean Square Error', metrics.r2_score(y_test, Prediction))
+    print('R2 Score', metrics.r2_score(y_test, Prediction))
     print('Mean Square Error', metrics.mean_squared_error(np.asarray(y_test), Prediction))
     print("Actual time for training", endTrain - startTrain)
     print("Actual time for prediction", end_test - start_test)
@@ -88,12 +87,13 @@ elif choice == 2:
     prediction = poly_model.predict(poly_features.fit_transform(x_test))
     print('Co-efficient of linear regression', poly_model.coef_)
     print('Intercept of linear regression model', poly_model.intercept_)
-    print('Mean Square Error', metrics.r2_score(y_test, prediction))
+    print('R2 Score', metrics.r2_score(y_test, prediction))
     print('Mean Square Error', metrics.mean_squared_error(y_test, prediction))
     print("Actual time for training", endTrain - startTrain)
     print("Actual time for prediction", end_test - start_test)
 
-    true_player_value = np.asarray(y_test)[0]
-    predicted_player_value = prediction[0]
-    print("The true price value " + str(true_player_value))
-    print("The predicted price value " + str(predicted_player_value))
+    true_price_value = np.asarray(y_test)[0]
+    predicted_price_value = prediction[0]
+
+    print("The true price value " + str(true_price_value))
+    print("The predicted price value " + str(predicted_price_value))
