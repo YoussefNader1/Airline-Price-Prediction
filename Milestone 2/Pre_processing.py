@@ -12,6 +12,22 @@ def Feature_Encoder(X, cols):
     return X
 
 
+def Feature_Encoder_TicketCategory(Y):
+    l=[]
+    for rows in Y:
+        if rows == 'very expensive':
+            l.append(3)
+        elif rows == 'expensive':
+            l.append(2)
+        elif rows == 'moderate':
+            l.append(1)
+        elif rows == 'cheap':
+            l.append(0)
+
+    return pd.DataFrame(l)
+
+
+
 def featureScaling(X, a, b):
     X = np.array(X)
     Normalized_X = np.zeros((X.shape[0], X.shape[1]))

@@ -7,7 +7,7 @@ def correlation(X, Y):
     result = pd.concat([X, Y], axis=1, join='inner')
     result_corr = result.corr()
     # return only features with correlation more than 0.1
-    top_feature = result_corr.index[abs(result_corr['TicketCategory']) > 0.1]
+    top_feature = result_corr.index[abs(result_corr['0']) > 0.2]
     plt.subplots(figsize=(12, 8))
     top_corr = result[top_feature].corr()
     sns.heatmap(top_corr, annot=True)
