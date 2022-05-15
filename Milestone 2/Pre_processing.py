@@ -13,20 +13,20 @@ def Feature_Encoder(X, cols):
 
 
 def Feature_Encoder_TicketCategory(Y):
-    l=[]
-    for rows in Y:
-        if rows == 'very expensive':
-            l.append(3)
-        elif rows == 'expensive':
-            l.append(2)
-        elif rows == 'moderate':
-            l.append(1)
-        elif rows == 'cheap':
-            l.append(0)
+    l = []
+    l = Y['TicketCategory']
+    x = []
+    for rows in range(len(l)):
+        if l[rows] == 'very expensive':
+            x.append(3)
+        elif l[rows] == 'expensive':
+            x.append(2)
+        elif l[rows] == 'moderate':
+            x.append(1)
+        elif l[rows] == 'cheap':
+            x.append(0)
 
-    return pd.DataFrame(l)
-
-
+    return x
 
 def featureScaling(X, a, b):
     X = np.array(X)
@@ -94,4 +94,3 @@ def X_preprocessData(X, data):
     X['month'] = pd.to_numeric(X['month'])
 
     return X
-
