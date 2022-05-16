@@ -1,13 +1,11 @@
 import pickle
-import pandas as pd
+# import pandas as pd
 from sklearn import metrics
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import PolynomialFeatures
 from Pre_processing import *
 from Correlation import *
 from sklearn import svm
 import time
-
 
 # Load Airline data
 data = pd.read_csv('airline-price-classification.csv')
@@ -125,14 +123,30 @@ elif choice == 3:
     prediction = pickled_model_rbf.predict(x_test)
     # end_test = time.time()
 
-    print("Accuracy rbf:", metrics.accuracy_score(y_test,prediction ))
+    print("Accuracy rbf:", metrics.accuracy_score(y_test, prediction))
     print('R2 Score', metrics.r2_score(y_test, prediction))
     print('Mean Square Error', metrics.mean_squared_error(y_test, prediction))
     # print("Actual time for training", endTrain - startTrain)
     # print("Actual time for Testing", end_test - start_test)
 
 elif choice == 4:
-    svc = svm.SVC(kernel='linear', C=C).fit(X, Y)
 
+    # startTrain = time.time()
+    # svc = svm.SVC(kernel='linear', C=C).fit(x_train, y_train.values.ravel())
+    # endTrain = time.time()
 
+    # saving Linear kernel model
+    # pickle.dump(svc, open('kernel.pkl', 'wb'))
+    # ----------------------------------------------------------------------------------------------------
+    # loading rbf model
+    pickled_model_kernel = pickle.load(open('kernel.pkl', 'rb'))
+    # ----------------------------------------------------------------------------------------------------
+    # start_test = time.time()
+    prediction = pickled_model_kernel.predict(x_test)
+    # end_test = time.time()
 
+    print("Accuracy kernel:", metrics.accuracy_score(y_test, prediction))
+    print('R2 Score', metrics.r2_score(y_test, prediction))
+    print('Mean Square Error', metrics.mean_squared_error(y_test, prediction))
+    # print("Actual time for training", endTrain - startTrain)
+    # print("Actual time for Testing", end_test - start_test)
