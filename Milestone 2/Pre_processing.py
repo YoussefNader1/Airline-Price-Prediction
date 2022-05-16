@@ -25,7 +25,6 @@ def Feature_Encoder_TicketCategory(Y):
             x.append(1)
         elif l[rows] == 'cheap':
             x.append(0)
-
     return x
 
 def featureScaling(X, a, b):
