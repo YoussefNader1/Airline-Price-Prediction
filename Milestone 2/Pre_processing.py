@@ -27,6 +27,7 @@ def Feature_Encoder_TicketCategory(Y):
             x.append(0)
     return x
 
+
 def featureScaling(X, a, b):
     X = np.array(X)
     Normalized_X = np.zeros((X.shape[0], X.shape[1]))
