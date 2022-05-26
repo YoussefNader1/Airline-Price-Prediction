@@ -35,8 +35,8 @@ def featureScaling(X, a, b):
         Normalized_X[:, i] = ((X[:, i] - min(X[:, i])) / (max(X[:, i]) - min(X[:, i]))) * (b - a) + a
     # As x is a np array, so we need to cast it into dataframe to avoid losing columns names
     DataFrameReturned = pd.DataFrame(Normalized_X,
-                                     columns=['airline', 'ch_code', 'num_code', 'dep_time', 'time_taken', 'stop',
-                                              'arr_time', 'type', 'source', 'destination', 'day', 'month'])
+                                     columns=['ch_code', 'num_code', 'time_taken', 'stop',
+                                               'month'])
     return DataFrameReturned
 
 

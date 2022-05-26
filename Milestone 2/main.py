@@ -40,6 +40,8 @@ Y = pd.DataFrame(g)
 top_features = correlation(X, Y)
 X = X[top_features]
 
+print(X)
+
 # Data distribution
 x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.20, shuffle=True,
                                                     random_state=1)  # Features splitting
@@ -161,9 +163,9 @@ elif choice == 4:
 # Logistic Regression Model
 elif choice == 5:
 
-    startTrain = time.time()
-    LRG = linear_model.LogisticRegression(random_state=0, solver='liblinear').fit(x_train, y_train.values.ravel())
-    endTrain = time.time()
+    # startTrain = time.time()
+    # LRG = linear_model.LogisticRegression(random_state=0, solver='liblinear').fit(x_train, y_train.values.ravel())
+    # endTrain = time.time()
 
     # saving Logistic Regression model
     # pickle.dump(LRG, open('LogisticRegression.pkl', 'wb'))
@@ -171,35 +173,35 @@ elif choice == 5:
     # loading Logistic Regression model
     pickled_model_LogisticRegression = pickle.load(open('LogisticRegression.pkl', 'rb'))
     # ----------------------------------------------------------------------------------------------------
-    start_test = time.time()
-    prediction = LRG.predict(x_test)
-    end_test = time.time()
+    # start_test = time.time()
+    prediction = pickled_model_LogisticRegression.predict(x_test)
+    # end_test = time.time()
 
     print("Accuracy Logistic Regression:", metrics.accuracy_score(y_test, prediction))
     print('R2 Score', metrics.r2_score(y_test, prediction))
     print('Mean Square Error', metrics.mean_squared_error(y_test, prediction))
-    print("Actual time for training", endTrain - startTrain)
-    print("Actual time for Testing", end_test - start_test)
+    # print("Actual time for training", endTrain - startTrain)
+    # print("Actual time for Testing", end_test - start_test)
 
 # Decision Tree Model
 elif choice == 6:
 
-    startTrain = time.time()
-    DT = DecisionTreeRegressor(random_state=0, max_depth=3, min_samples_leaf=5).fit(x_train, y_train.values.ravel())
-    endTrain = time.time()
+    # startTrain = time.time()
+    # DT = DecisionTreeRegressor(random_state=0, max_depth=3, min_samples_leaf=5).fit(x_train, y_train.values.ravel())
+    # endTrain = time.time()
 
     # saving Decision Tree model
     # pickle.dump(DT, open('DT.pkl', 'wb'))
     # ----------------------------------------------------------------------------------------------------
     # loading Decision Tree model
-    # pickled_model_DecisionTree = pickle.load(open('DT.pkl', 'rb'))
+    pickled_model_DecisionTree = pickle.load(open('DT.pkl', 'rb'))
     # ----------------------------------------------------------------------------------------------------
-    start_test = time.time()
-    prediction = DT.predict(x_test)
-    end_test = time.time()
+    # start_test = time.time()
+    prediction = pickled_model_DecisionTree.predict(x_test)
+    # end_test = time.time()
 
     # print("Accuracy Decision Tree:", metrics.accuracy_score(y_test, prediction))
     print('R2 Score', metrics.r2_score(y_test, prediction))
     print('Mean Square Error', metrics.mean_squared_error(y_test, prediction))
-    print("Actual time for training", endTrain - startTrain)
-    print("Actual time for Testing", end_test - start_test)
+    # print("Actual time for training", endTrain - startTrain)
+    # print("Actual time for Testing", end_test - start_test)
