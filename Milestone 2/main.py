@@ -15,7 +15,6 @@ data = pd.read_csv('airline-price-classification.csv')
 X = data.iloc[:, 0:10]
 # Label
 Y = data.iloc[:, -1]
-
 # Y.to_frame(name='my_column_name')
 Y = pd.DataFrame(Y)
 
@@ -25,9 +24,9 @@ X = X_preprocessData(X, data)
 # Y = Y_preprocessData(Y)
 
 # Feature encoding
-cols = ('airline', 'ch_code', 'type', 'source', 'destination')  # column to be encoded
+cols = ('airline', 'source', 'destination', 'ch_code')  # column to be encoded
 X = Feature_Encoder(X, cols)
-
+X['type'] = Feature_Encoder_Type(X)
 # Feature Scaling
 X = featureScaling(X, 0, 1)
 
@@ -49,7 +48,6 @@ x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.20, shuffl
 # change dataframes into arrays
 X = np.array(X)
 Y = np.array(Y)
-
 # Drop nulls for train data
 x_train.dropna(how='any', inplace=True)
 y_train.dropna(how='any', inplace=True)
@@ -58,7 +56,6 @@ x_test.fillna(0)
 y_test.fillna(0)
 
 C = 0.001  # SVM regularization parameter
-
 print("Choose your model: \n")
 print("1 - Linear svm model")
 print("2 - Polynomial svm model")
@@ -67,6 +64,7 @@ print("4 - Linear kernel svm model")
 print("5 - Logistic Regression model")
 print('6 - Decision tree model')
 choice = int(input("Enter your choice: "))
+
 if choice == 1:
 
     # startTrain = time.time()

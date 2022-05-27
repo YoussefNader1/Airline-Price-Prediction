@@ -12,6 +12,47 @@ def Feature_Encoder(X, cols):
     return X
 
 
+def Feature_Encoder_Type(X):
+    l = []
+    l = X['type']
+    x = []
+    for rows in range(len(l)):
+        if l[rows] == 'business':
+            x.append(0)
+        elif l[rows] == 'economy':
+            x.append(1)
+        else:
+            x.append(2)
+    return x
+
+
+def Feature_Encoder_ch_code(X):
+    l = []
+    l = X['ch_code']
+    x = []
+    for rows in range(len(l)):
+        if l[rows] == '2T':
+            x.append(0)
+        elif l[rows] == '6E':
+            x.append(1)
+        elif l[rows] == 'AI':
+            x.append(2)
+        elif l[rows] == 'G8':
+            x.append(3)
+        elif l[rows] == 'I5':
+            x.append(4)
+        elif l[rows] == 'S5':
+            x.append(5)
+        elif l[rows] == 'SG':
+            x.append(6)
+        elif l[rows] == 'UK':
+            x.append(7)
+        # if uniqe value not found
+        else:
+            x.append(8)
+    return x
+
+
 def Feature_Encoder_TicketCategory(Y):
     l = []
     l = Y['TicketCategory']
@@ -28,6 +69,21 @@ def Feature_Encoder_TicketCategory(Y):
     return x
 
 
+def featureScalingTestScript(X, a, b):
+    # min[0.0, 0.0, 101.0, 0.1, 0.5, 0.0, 0.05, 0.0, 0.0, 0.0, 1.0, 2.0]
+    # max[7.0, 7.0, 9991.0, 23.55, 49.5, 2.0, 23.59, 1.0, 5.0, 5.0, 31.0, 3.0]
+    minn = [0, 101, 0.5, 0, 0, 2]
+    maxx = [7, 9991, 49.5, 2, 1, 3]
+    X = np.array(X)
+    Normalized_X = np.zeros((X.shape[0], X.shape[1]))
+    for i in range(X.shape[1]):
+        Normalized_X[:, i] = ((X[:, i] - minn[i]) / (maxx[i] - minn[i])) * (b - a) + a
+    # As x is a np array, so we need to cast it into dataframe to avoid losing columns names
+    DataFrameReturned = pd.DataFrame(Normalized_X,
+                                     columns=['ch_code', 'num_code', 'time_taken', 'stop', 'type', 'month'])
+    return DataFrameReturned
+
+
 def featureScaling(X, a, b):
     X = np.array(X)
     Normalized_X = np.zeros((X.shape[0], X.shape[1]))
@@ -35,8 +91,8 @@ def featureScaling(X, a, b):
         Normalized_X[:, i] = ((X[:, i] - min(X[:, i])) / (max(X[:, i]) - min(X[:, i]))) * (b - a) + a
     # As x is a np array, so we need to cast it into dataframe to avoid losing columns names
     DataFrameReturned = pd.DataFrame(Normalized_X,
-                                     columns=['ch_code', 'num_code', 'time_taken', 'stop',
-                                               'month'])
+                                     columns=['airline', 'ch_code', 'num_code', 'dep_time', 'time_taken', 'stop',
+                                              'arr_time', 'type', 'source', 'destination', 'day', 'month'])
     return DataFrameReturned
 
 

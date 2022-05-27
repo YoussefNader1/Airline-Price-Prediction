@@ -5,6 +5,7 @@ from sklearn.preprocessing import PolynomialFeatures
 from Pre_processing import *
 from Correlation import *
 import time
+import pickle
 
 # Load Airline data
 data = pd.read_csv('airline-price-prediction.csv')
@@ -28,7 +29,6 @@ X = featureScaling(X, 0, 1)
 # Feature selection
 top_features = correlation(X, Y)
 X = X[top_features]
-
 # Data distribution
 x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.20, shuffle=True,
                                                     random_state=1)  # Features splitting
@@ -46,27 +46,30 @@ y_test.fillna(0)
 
 print("Enter 1 for multiple regression model\nEnter 2 for polynomial regression")
 choice = int(input("Choose your model: "))
+
 if choice == 1:
-    cls = linear_model.LinearRegression()
-    startTrain = time.time()
-    cls.fit(x_train, y_train)
-    endTrain = time.time()
-    start_test = time.time()
+    # cls = linear_model.LinearRegression()
+    cls = pickle.load(open('linear_regression.pkl', 'rb'))
+    # startTrain = time.time()
+    # cls.fit(x_train, y_train)
+    # endTrain = time.time()
+    # start_test = time.time()
     Prediction = cls.predict(x_test)
-    end_test = time.time()
+    # end_test = time.time()
 
     print('Co-efficient of linear regression', cls.coef_)
     print('Intercept of linear regression model', cls.intercept_)
     print('R2 Score', metrics.r2_score(y_test, Prediction))
     print('Mean Square Error', metrics.mean_squared_error(np.asarray(y_test), Prediction))
-    print("Actual time for training", endTrain - startTrain)
-    print("Actual time for Testing", end_test - start_test)
+    # print("Actual time for training", endTrain - startTrain)
+    # print("Actual time for Testing", end_test - start_test)
 
     true_price_value = np.asarray(y_test)[0]
     predicted_price_value = Prediction[0]
 
     print("The true price value " + str(true_price_value))
     print("The predicted price value " + str(predicted_price_value))
+
 
 elif choice == 2:
     poly_features = PolynomialFeatures(degree=5)
