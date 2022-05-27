@@ -12,7 +12,7 @@ import time
 import joblib
 
 # Load Airline data
-#data = pd.read_csv('airline-price-prediction.csv')
+# data = pd.read_csv('airline-price-prediction.csv')
 data = pd.read_csv('airline-test-samples.csv')
 
 # Features
@@ -33,11 +33,13 @@ X['type'] = Feature_Encoder_Type(X)
 type = X['type']
 X['ch_code'] = Feature_Encoder_ch_code(X)
 
-#x_train, X, y_train, Y = train_test_split(X, Y, test_size=1, shuffle=True, random_state=1)
+# x_train, X, y_train, Y = train_test_split(X, Y, test_size=1, shuffle=True, random_state=1)
 
 # Feature Scaling
 X = featureScalingTestScript(X, 0, 1)
 
+X = X.fillna(0)
+Y = Y.fillna(0)
 # change dataframes into arrays
 X = np.array(X)
 Y = np.array(Y)
@@ -98,7 +100,6 @@ if choice == 1:
     print('Intercept of linear regression model', cls.intercept_)
     print('R2 Score', metrics.r2_score(Y, Prediction))
     print('Mean Square Error', metrics.mean_squared_error(np.asarray(Y), Prediction))
-
 
     true_price_value = np.asarray(Y)[0]
     predicted_price_value = Prediction[0]

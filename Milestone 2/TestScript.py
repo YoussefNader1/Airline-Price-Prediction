@@ -54,20 +54,23 @@ X = featureScalingTestScript(X, 0, 1)
 g = pd.Series(Y, name='TicketCategory')
 Y = pd.DataFrame(g)
 
+X=X.fillna(0)
+Y=Y.fillna(0)
+
 # X.interpolate()
 # Y.interpolate()
 X = np.array(X)
 Y = np.array(Y)
 
 C = 0.001  # SVM regularization parameter
-
-print("Choose your model: \n")
-print("1 - Linear svm model")
-print("2 - Polynomial svm model")
-print("3 - RBF svm model")
-print("4 - Linear kernel svm model")
-print("5 - Logistic Regression model")
-print('6 - Decision tree model')
+#
+# print("Choose your model: \n")
+# print("1 - Linear svm model")
+# print("2 - Polynomial svm model")
+# print("3 - RBF svm model")
+# print("4 - Linear kernel svm model")
+# print("5 - Logistic Regression model")
+# print('6 - Decision tree model')
 choice = 1  # int(input("Enter your choice: "))
 
 
