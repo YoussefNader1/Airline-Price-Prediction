@@ -52,8 +52,8 @@ Y = np.array(Y)
 x_train.dropna(how='any', inplace=True)
 y_train.dropna(how='any', inplace=True)
 # Replace null for test data
-x_test.fillna(0)
-y_test.fillna(0)
+x_test.fillna(0,inplace=True)
+y_test.fillna(0,inplace=True)
 
 C = 0.001  # SVM regularization parameter
 print("Choose your model: \n")

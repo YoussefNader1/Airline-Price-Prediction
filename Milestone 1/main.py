@@ -42,8 +42,8 @@ Y = np.array(Y)
 x_train.dropna(how='any', inplace=True)
 y_train.dropna(how='any', inplace=True)
 # Replace null for test data
-x_test.fillna(0)
-y_test.fillna(0)
+x_test.fillna(0,inplace=True)
+y_test.fillna(0,inplace=True)
 
 print("Enter 1 for multiple regression model\nEnter 2 for polynomial regression")
 choice = int(input("Choose your model: "))
