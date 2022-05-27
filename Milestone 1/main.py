@@ -1,3 +1,4 @@
+import joblib
 from sklearn import linear_model
 from sklearn import metrics
 from sklearn.model_selection import train_test_split
@@ -100,3 +101,6 @@ elif choice == 2:
 
     print("The true price value " + str(true_price_value))
     print("The predicted price value " + str(predicted_price_value))
+
+    #joblib.dump(poly_model, 'polymodel')
+    #joblib.dump(poly_features, 'poilynomia_features_model')
