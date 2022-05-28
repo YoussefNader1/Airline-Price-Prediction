@@ -11,7 +11,7 @@ def correlation(X, Y):
     plt.subplots(figsize=(12, 8))
     top_corr = result[top_feature].corr()
     sns.heatmap(top_corr, annot=True)
-    # plt.show()
+    plt.show()
     # drop top_feature[0] "airline" as it is highly correlated with "ch_code"
     top_feature = top_feature.delete(0)
     top_feature = top_feature.delete(-1)
