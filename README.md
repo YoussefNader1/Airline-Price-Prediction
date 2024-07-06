@@ -1,4 +1,8 @@
-# Airline-Price-Prediction
+# Airline Price Prediction
+
+> ### Airline ticket pricing changes according to several factors (type of ticket, flight time, etc). <br>
+
+> ### By applying Machine Learning techniques, preprocessing, etc. We can predict flight prices and know if the ticket price is high or cheap or moderator.
 
 ## Feature selection regression
 ![Figure_0 1](https://user-images.githubusercontent.com/73204292/168624930-5c1ef536-5b42-4809-8983-a71b7e0cc14d.png)
